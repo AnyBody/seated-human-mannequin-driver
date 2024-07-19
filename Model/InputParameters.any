@@ -15,7 +15,7 @@
     AnyVar PelvisSeatLinXVel = 0;         ///< Movement of the pelvis on the seat
     AnyVar SeatGlobalLinYVel = 0;         ///< Movement of the seat Height
     AnyVar SeatGlobalZRotVel = 0;         ///< Movement of seat inclination
-    AnyVar GlobalBackRestRotZVel = 30;     ///< Back rest inclination velocity
+    AnyVar GlobalBackRestRotZVel = 0;     ///< Back rest inclination velocity
     AnyVar GlobalLegRestRotZVel = 0;      ///< Leg rest inclination velocity
     AnyVar LegRestFootRestLinYVel = 0;    ///< Movement of the footrest along the leg rest
   }; // DrvVel
