@@ -61,7 +61,7 @@ AnyFolder Jnt={
   }; // BackRestThoraxJnt
   
   AnyFolder FootRestFootJnt = {
-    
+    #if USE_LEG_MANNEQUIN_DRIVERS == 0
     AnyFolder Right = {      
       
       AnyKinLinear FootRestFootLinMeasure = {
@@ -143,7 +143,26 @@ AnyFolder Jnt={
         Reaction.Type = {Off};
       };
     }; //Left    
-    
+    #else
+    AnyFolder Right = {
+      AnyKinEq PlaceHeelOnFootRest = {
+        AnyKinLinear Lin = {
+          AnyRefFrame &FootRef = ....RefH.Right.Leg.Seg.Foot.HeelJoint;
+          AnyRefFrame &FootRestRef = ....RefP.Seg.FootRest.FootRestLegRestJntNode;
+        };
+        MeasureOrganizer = {1};
+      };
+    };
+    AnyFolder Left = {
+      AnyKinEq PlaceHeelOnFootRest = {
+        AnyKinLinear Lin = {
+          AnyRefFrame &FootRef = ....RefH.Left.Leg.Seg.Foot.HeelJoint;
+          AnyRefFrame &FootRestRef = ....RefP.Seg.FootRest.FootRestLegRestJntNode;
+        };
+        MeasureOrganizer = {1};
+      };
+    };
+    #endif
   }; // FootFootRestJnt  
   
   AnyFolder UlnaArmRestJnt = {
@@ -325,6 +344,35 @@ AnyFolder Drivers = {
   
   AnyFolder Right = {
     
+    
+    // ************************************
+    // Drivers for the right leg
+    // ************************************
+    #if USE_LEG_MANNEQUIN_DRIVERS == 1
+    
+    AnyKinEqSimpleDriver LegDrivers = {
+      AnyKinMeasure &HipAbduction = ..RefHM.Interface.Right.HipAbduction;
+      AnyKinMeasure &HipExternalRotation = ..RefHM.Interface.Right.HipExternalRotation;
+      AnyKinMeasure &KneeFlexion = ..RefHM.Interface.Right.KneeFlexion;
+      AnyKinMeasure &AnklePlantarFlexion = ..RefHM.Interface.Right.AnklePlantarFlexion;
+      AnyKinMeasure &SubTalarEversion = ..RefHM.Interface.Right.SubTalarEversion;
+      DriverPos = {..JntPos.Right.HipAbduction,
+                   ..JntPos.Right.HipExternalRotation,
+                   ..JntPos.Right.KneeFlexion,
+                   ..JntPos.Right.AnklePlantarFlexion,
+                   ..JntPos.Right.SubTalarEversion,
+                  }*pi/180;
+      DriverVel = {..JntVel.Right.HipAbduction,
+                   ..JntVel.Right.HipExternalRotation,
+                   ..JntVel.Right.KneeFlexion,
+                   ..JntVel.Right.AnklePlantarFlexion,
+                   ..JntVel.Right.SubTalarEversion,
+                  }*pi/180;
+      Reaction.Type = {Off,Off,Off,Off,Off};
+    };
+    #endif
+
+    
     // ************************************
     // Drivers for the right arm
     // ************************************
@@ -387,6 +435,35 @@ AnyFolder Drivers = {
   }; //End Right
   
   AnyFolder Left = {
+    
+    
+    // ************************************
+    // Drivers for the left leg
+    // ************************************
+    #if USE_LEG_MANNEQUIN_DRIVERS == 1
+    
+    AnyKinEqSimpleDriver LegDrivers = {
+      AnyKinMeasure &HipAbduction = ..RefHM.Interface.Left.HipAbduction;
+      AnyKinMeasure &HipExternalRotation = ..RefHM.Interface.Left.HipExternalRotation;
+      AnyKinMeasure &KneeFlexion = ..RefHM.Interface.Left.KneeFlexion;
+      AnyKinMeasure &AnklePlantarFlexion = ..RefHM.Interface.Left.AnklePlantarFlexion;
+      AnyKinMeasure &SubTalarEversion = ..RefHM.Interface.Left.SubTalarEversion;
+      DriverPos = {..JntPos.Left.HipAbduction,
+                   ..JntPos.Left.HipExternalRotation,
+                   ..JntPos.Left.KneeFlexion,
+                   ..JntPos.Left.AnklePlantarFlexion,
+                   ..JntPos.Left.SubTalarEversion,
+                  }*pi/180;
+      DriverVel = {..JntVel.Left.HipAbduction,
+                   ..JntVel.Left.HipExternalRotation,
+                   ..JntVel.Left.KneeFlexion,
+                   ..JntVel.Left.AnklePlantarFlexion,
+                   ..JntVel.Left.SubTalarEversion,
+                  }*pi/180;
+      Reaction.Type = {Off,Off,Off,Off,Off};
+    };
+    #endif
+
     
     // ************************************
     // Drivers for the left arm
