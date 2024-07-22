@@ -166,7 +166,7 @@ AnyFolder Jnt={
   }; // FootFootRestJnt  
   
   AnyFolder UlnaArmRestJnt = {
-    
+    #if USE_ARM_MANNEQUIN_DRIVERS == 0
     AnyFolder Right = {
       AnyKinEqSimpleDriver ArmRestElbowLinMeasureXDrv={
         AnyKinLinear ArmRestElbowLinMeasure = {
@@ -213,7 +213,8 @@ AnyFolder Jnt={
         DriverVel={0,0};
         Reaction.Type={Off,Off};
       };      
-    }; // Left    
+    }; // Left  
+    #endif
   }; // UlnaArmRestJnt
 }; //Jnt
 
@@ -376,6 +377,24 @@ AnyFolder Drivers = {
     // ************************************
     // Drivers for the right arm
     // ************************************
+
+    #if USE_ARM_MANNEQUIN_DRIVERS == 1
+    
+    AnyKinEqSimpleDriver ArmDrivers = {
+      AnyKinMeasure &GHFlexion = ..RefHM.Interface.Right.GlenohumeralFlexion;
+      AnyKinMeasure &GHExternalRotation = ..RefHM.Interface.Right.GlenohumeralExternalRotation;
+      AnyKinMeasure &ElbowFlexion = ..RefHM.Interface.Right.ElbowFlexion;
+      DriverPos = {..JntPos.Right.GlenohumeralFlexion,
+                   ..JntPos.Right.GlenohumeralExternalRotation,
+                   ..JntPos.Right.ElbowFlexion,
+                  }*pi/180;
+      DriverVel = {..JntVel.Right.GlenohumeralFlexion,
+                   ..JntVel.Right.GlenohumeralExternalRotation,
+                   ..JntVel.Right.ElbowFlexion,
+                  }*pi/180;
+      Reaction.Type = {Off,Off,Off,};
+    };
+    #endif
     
     //Sterno clavicular joint driver
     AnyKinEqSimpleDriver SCDriverRight ={
@@ -469,6 +488,24 @@ AnyFolder Drivers = {
     // Drivers for the left arm
     // ************************************
     
+    #if USE_ARM_MANNEQUIN_DRIVERS == 1
+    
+    AnyKinEqSimpleDriver ArmDrivers = {
+      AnyKinMeasure &GHFlexion = ..RefHM.Interface.Left.GlenohumeralFlexion;
+      AnyKinMeasure &GHExternalRotation = ..RefHM.Interface.Left.GlenohumeralExternalRotation;
+      AnyKinMeasure &ElbowFlexion = ..RefHM.Interface.Left.ElbowFlexion;
+      DriverPos = {..JntPos.Left.GlenohumeralFlexion,
+                   ..JntPos.Left.GlenohumeralExternalRotation,
+                   ..JntPos.Left.ElbowFlexion,
+                  }*pi/180;
+      DriverVel = {..JntVel.Left.GlenohumeralFlexion,
+                   ..JntVel.Left.GlenohumeralExternalRotation,
+                   ..JntVel.Left.ElbowFlexion,
+                  }*pi/180;
+      Reaction.Type = {Off,Off,Off,};
+    };
+    #endif
+
     //Sterno clavicular joint driver
     AnyKinEqSimpleDriver SCDriverLeft ={
       AnyKinMeasure& ref1 =....BodyModel.Interface.Left.SternoClavicularProtraction;

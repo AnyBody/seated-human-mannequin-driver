@@ -22,7 +22,8 @@ Main = {
   // ----------------------------------------------------------
   #define REMOVE_LEGREST 1
   #define USE_LEG_MANNEQUIN_DRIVERS 1
-  
+  #define USE_ARM_MANNEQUIN_DRIVERS 0
+
   #include "Model/InputParameters.any"
   
   // ----------------------------------------------------------
