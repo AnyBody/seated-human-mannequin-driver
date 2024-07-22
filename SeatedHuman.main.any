@@ -20,6 +20,9 @@ Main = {
   // ----------------------------------------------------------
   // Model parameters: Driver position and support settings
   // ----------------------------------------------------------
+  #define REMOVE_LEGREST 1
+  #define USE_LEG_MANNEQUIN_DRIVERS 1
+  
   #include "Model/InputParameters.any"
   
   // ----------------------------------------------------------

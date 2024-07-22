@@ -11,10 +11,10 @@ RefPM.Seg.Seat.Axes0 = {{0, -1, 0}, {1, 0, 0}, {0, 0, 1}};
 
 RefPM.Seg.HeadRest.r0 = {0, 1/2*Dim.HeadRestHeight, 0};
 RefPM.Seg.HeadRest.Axes0 = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-
+#if REMOVE_LEGREST == 0
 RefPM.Seg.LegRest.r0 = {Dim.SeatLength, -(Dim.BackRestHeight+1/2*Dim.LegRestLength), 0};
 RefPM.Seg.LegRest.Axes0 = {{1, 0, 0}, {0, 1, 0}, {0, 0, 1}};
-
+#endif
 RefPM.Seg.FootRest.r0 = {Dim.SeatLength+1/2*Dim.FootRestLength, -(Dim.BackRestHeight+Dim.LegRestLength), 0};
 RefPM.Seg.FootRest.Axes0 = {{0, -1, 0}, {1, 0, 0}, {0, 0, 1}};
 

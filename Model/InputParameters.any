@@ -5,9 +5,13 @@
     AnyVar SeatGlobalLinYPos = 0;         ///< Seat Height
     AnyVar SeatGlobalZRot = 0;            ///< Forward seat inclination
     AnyVar BackRestHeadResRotZPos = 0;    ///< Rotation of the head rest wrt the back rest
-    AnyVar GlobalLegRestRotZPos = 30;     ///< Inclination of the leg rest
     AnyVar GlobalBackRestRotZPos = 0;    ///< Back rest inclination
+    #if REMOVE_LEGREST == 0
+    AnyVar GlobalLegRestRotZPos = 0;     ///< Inclination of the leg rest
     AnyVar LegRestFootRestLinYPos = 0.2; ///< Position of the footrest along the leg rest
+    #else
+    AnyVar FootRestSeatLinYPos = 0.5;    ///< Vertical position of the footrest from the seat
+    #endif
   }; // DrvPos
   
   /// Driver Velocities - angles are in degrees per second
@@ -16,8 +20,12 @@
     AnyVar SeatGlobalLinYVel = 0;         ///< Movement of the seat Height
     AnyVar SeatGlobalZRotVel = 0;         ///< Movement of seat inclination
     AnyVar GlobalBackRestRotZVel = 0;     ///< Back rest inclination velocity
+    #if REMOVE_LEGREST == 0
     AnyVar GlobalLegRestRotZVel = 0;      ///< Leg rest inclination velocity
     AnyVar LegRestFootRestLinYVel = 0;    ///< Movement of the footrest along the leg rest
+    #else
+    AnyVar FootRestSeatLinYVel = 0.0;    ///< Vertical movement of the footrest from the seat
+    #endif
   }; // DrvVel
   
   // --------------------------------------------------------

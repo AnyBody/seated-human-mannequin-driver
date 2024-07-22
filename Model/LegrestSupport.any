@@ -17,7 +17,7 @@ AnyFolder LegRestSupport = {
         ARel = {{0.8523643, -0.06365893, 0.5190593}, {0.07171567, 0.9974147, 0.004559159}, {-0.5180076, 0.03333862, 0.8547261}}';
       };
   };
-  
+  #if REMOVE_LEGREST == 0
   AnyFolder ShankSupportR = {
     AnyRefFrame &BaseObject =....EnvironmentModel.Seg.LegRest;
     AnyRefFrame &TargetObject =....BodyModel.Right.Leg.Seg.Shank.AnatomicalFrame.SupportNode;
@@ -61,5 +61,6 @@ AnyFolder LegRestSupport = {
     AnyIntArray Direction={0,1,2}; //first element gives normal direction
     #include  "<ANYBODY_PATH_MODELUTILS>\FrictionContactMuscles\ContactSurfaceLinPush.any"
   };
+  #endif
 };
 

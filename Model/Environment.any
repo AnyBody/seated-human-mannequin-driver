@@ -119,7 +119,11 @@ AnyFolder EnvironmentModel = {
       
       AnyRefNode SeatLegRestJntNode = {
         sRel = {0, -1/2*.Dim.SeatLength, 0};
-      };    
+      }; 
+      AnyRefNode SeatFootRestJntNode = {
+        sRel = {0, -1/2*.Dim.SeatLength, 0};
+        ARel = RotMat(-0.5*pi,z);
+      };   
     }; // Seat 
     
     //-----------------------------------------------------
@@ -155,6 +159,7 @@ AnyFolder EnvironmentModel = {
     //-------------------------------------------------------
     // LegRest
     //-------------------------------------------------------
+    #if REMOVE_LEGREST == 0
     AnySeg LegRest = {
       AnyFolder &Dim = .ChairDimensions;
       Mass = 0.0;
@@ -183,6 +188,7 @@ AnyFolder EnvironmentModel = {
         };
       };
     }; // LegRest 
+    #endif
     
     //---------------------------------------------------
     // FootRest
@@ -336,6 +342,7 @@ AnyFolder EnvironmentModel = {
       AnyRefNode &HeadRestNode = ..Seg.HeadRest.HeadRestBackRestJntNode;
     }; // BackRestHeadRestLink
     
+    #if REMOVE_LEGREST == 0
     AnyRevoluteJoint SeatLegRestJnt = {
       Axis = z; 
       AnyRefNode &LegRestNode = ..Seg.LegRest.LegRestSeatJntNode;
@@ -348,6 +355,19 @@ AnyFolder EnvironmentModel = {
       AnyRefNode &LegRestNode = ..Seg.LegRest.LegRestFootRestJntNode;
       AnyRefNode &FootRestNode = ..Seg.FootRest.FootRestLegRestJntNode;
     };  
+    #else
+    AnyKinMeasureOrg SeatFootRestMeasure = {      
+      AnyKinLinear Lin = {
+//        Ref = 1;
+        AnyRefNode &SeatNode = ...Seg.Seat.SeatFootRestJntNode;
+        AnyRefNode &FootRestNode = ...Seg.FootRest.FootRestLegRestJntNode;
+      };
+    };
+    AnyKinRotational FootRestGlobalRot = {
+      AnyRefNode &FootRestNode = ..Seg.FootRest.FootRestLegRestJntNode;
+      Type = RotAxesAngles;
+    };
+    #endif
     
     AnyFolder Right = {
       AnyRevoluteJoint BackArmRestJoint = {
@@ -429,6 +449,7 @@ AnyFolder EnvironmentModel = {
       Reaction.Type = {On};
     };  
     
+    #if REMOVE_LEGREST == 0
     AnyKinEqSimpleDriver GlobalLegRestDrv = {
       AnyKinRotational rot = {
         AnyRefFrame &LegRest = Main.Model.EnvironmentModel.Seg.LegRest;
@@ -446,5 +467,20 @@ AnyFolder EnvironmentModel = {
       DriverVel = {.DrvVel.LegRestFootRestLinYVel};
       Reaction.Type = {On};
     };
+    #else
+    AnyKinEqSimpleDriver SeatFootRestDrv = {
+      AnyKinMeasure &Jnt = ..Jnt.SeatFootRestMeasure;
+      MeasureOrganizer = {0,1,2};
+      DriverPos = -{0,.DrvPos.FootRestSeatLinYPos,0};
+      DriverVel = -{0,.DrvVel.FootRestSeatLinYVel,0};
+      Reaction.Type = {On,On,On};
+    };
+    AnyKinEq GlobalFootRestOrientation = {
+      AnyKinMeasure &Jnt = ..Jnt.FootRestGlobalRot;
+//      DriverPos = {0,0,0};
+//      DriverVel = {0,0,0};
+      Reaction.Type = {On,On,On};
+    };
+    #endif
   };
 };
