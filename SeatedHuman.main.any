@@ -1,6 +1,4 @@
-#include "../libdef.any"
-
-/** The Seated Human is a family of models resulting from a
+/* The Seated Human is a family of models resulting from a
 research project involving the furniture industry. This
 model is a human sitting in a generic chair where the seat,
 backrest, arm rests, foot rest and head rest can be adjusted
@@ -16,6 +14,14 @@ friction but no tension. The available friction is proportional
 to the normal force and the user can supply a friction 
 coefficient for each surface such that the effect of different 
 surface fabrics can be investigated.*/
+
+#ifpathexists   "../libdef.any"
+#include "../libdef.any"
+#else
+#include "<ANYBODY_PATH_INSTALLDIR>/AMMR/libdef.any"
+#endif
+
+
 Main = {
   // ----------------------------------------------------------
   // Model parameters: Driver position and support settings
