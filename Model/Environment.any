@@ -109,6 +109,11 @@ AnyFolder EnvironmentModel = {
         };
       };
       
+      AnyRefNode HipPoint = {
+        sRel = {0, 0.3*.Dim.SeatLength, 0};
+        ARel = RotMat(-0.5*pi,z);
+      };
+      
       AnyRefNode SeatBackRestJntNode = {
         sRel = {0, 1/2*.Dim.SeatLength, 0};
       };
@@ -359,7 +364,8 @@ AnyFolder EnvironmentModel = {
     AnyKinMeasureOrg SeatFootRestMeasure = {      
       AnyKinLinear Lin = {
 //        Ref = 1;
-        AnyRefNode &SeatNode = ...Seg.Seat.SeatFootRestJntNode;
+//        AnyRefNode &SeatNode = ...Seg.Seat.SeatFootRestJntNode;
+        AnyRefNode &SeatNode = ...Seg.Seat.HipPoint;
         AnyRefNode &FootRestNode = ...Seg.FootRest.FootRestLegRestJntNode;
       };
     };
@@ -471,7 +477,7 @@ AnyFolder EnvironmentModel = {
     AnyKinEqSimpleDriver SeatFootRestDrv = {
       AnyKinMeasure &Jnt = ..Jnt.SeatFootRestMeasure;
       MeasureOrganizer = {0,1,2};
-      DriverPos = -{0,.DrvPos.FootRestSeatLinYPos,0};
+      DriverPos = -{-Main.Model.EnvironmentModel.Seg.ChairDimensions.SeatLength,.DrvPos.FootRestSeatLinYPos,0};
       DriverVel = -{0,.DrvVel.FootRestSeatLinYVel,0};
       Reaction.Type = {On,On,On};
     };
