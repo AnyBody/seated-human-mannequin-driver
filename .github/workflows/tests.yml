@@ -16,8 +16,6 @@ concurrency:
 
 
 
-env:
-  CLEAN_START: ${{ github.event.inputs.clean_start || false }}
 
 
 jobs:
