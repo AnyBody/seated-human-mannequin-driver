@@ -20,8 +20,12 @@ Main = {
   // ----------------------------------------------------------
   // Model parameters: Driver position and support settings
   // ----------------------------------------------------------
+  // switch to remove legrest
   #define REMOVE_LEGREST 1
+  // switch to use leg mannequin drivers to position the leg, except hip flexion.
+  // heel point is in contact with the foot rest, and controls hip flexion
   #define USE_LEG_MANNEQUIN_DRIVERS 1
+  // switch to use arm mannequin drivers to position the arm instead of the armrest.
   #define USE_ARM_MANNEQUIN_DRIVERS 0
 
   #include "Model/InputParameters.any"
