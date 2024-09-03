@@ -1,0 +1,8 @@
+#include "../SeatedHuman.main.any"
+
+
+Main = {
+
+    AnyOperation& RunTest = RunApplication;
+
+};

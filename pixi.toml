@@ -1,0 +1,14 @@
+[project]
+name = "seated-human-mannequin-driver"
+version = "0.1.0"
+description = "Add a short description here"
+authors = ["Morten Enemark Lund <mel@anybodytech.com>"]
+channels = ["conda-forge", "anybody"]
+platforms = ["win-64"]
+
+[tasks]
+
+[dependencies]
+anybodycon = ">=8.0.5rc1,<9"
+pytest = ">=8.3.1,<9"
+anypytools = ">=1.12.2"
