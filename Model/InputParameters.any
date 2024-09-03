@@ -6,6 +6,7 @@
     AnyVar SeatGlobalZRot = 0;            ///< Forward seat inclination
     AnyVar BackRestHeadResRotZPos = 0;    ///< Rotation of the head rest wrt the back rest
     AnyVar GlobalBackRestRotZPos = 0;    ///< Back rest inclination
+    AnyVar FootRestGlobalZRot = 0;
     #if REMOVE_LEGREST == 0
     AnyVar GlobalLegRestRotZPos = 0;     ///< Inclination of the leg rest
     AnyVar LegRestFootRestLinYPos = 0.2; ///< Position of the footrest along the leg rest
@@ -20,6 +21,7 @@
     AnyVar SeatGlobalLinYVel = 0;         ///< Movement of the seat Height
     AnyVar SeatGlobalZRotVel = 0;         ///< Movement of seat inclination
     AnyVar GlobalBackRestRotZVel = 0;     ///< Back rest inclination velocity
+    AnyVar FootRestGlobalZRotVel = 0;
     #if REMOVE_LEGREST == 0
     AnyVar GlobalLegRestRotZVel = 0;      ///< Leg rest inclination velocity
     AnyVar LegRestFootRestLinYVel = 0;    ///< Movement of the footrest along the leg rest

@@ -481,10 +481,10 @@ AnyFolder EnvironmentModel = {
       DriverVel = -{0,.DrvVel.FootRestSeatLinYVel,0};
       Reaction.Type = {On,On,On};
     };
-    AnyKinEq GlobalFootRestOrientation = {
+    AnyKinEqSimpleDriver GlobalFootRestOrientation = {
       AnyKinMeasure &Jnt = ..Jnt.FootRestGlobalRot;
-//      DriverPos = {0,0,0};
-//      DriverVel = {0,0,0};
+      DriverPos = {Main.DrvPos.FootRestGlobalZRot,0,0}*pi/180;
+      DriverVel = {Main.DrvVel.FootRestGlobalZRotVel,0,0}*pi/180;
       Reaction.Type = {On,On,On};
     };
     #endif
